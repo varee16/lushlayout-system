@@ -1,4 +1,4 @@
-const nodemailer = require("nademailer");
+const nodemailer = require("nodemailer");
 
 module.exports = function sendEmail(email, orderId, token, license) {
     const transporter = nodemailer.createTransport({
