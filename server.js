@@ -1,16 +1,32 @@
-const express = require("express");
-const app = express();
+const express = require("express")
+const path = require("path")
+const fs = require("fs")
+const { error } = require("console")
 
-app.use(express.json());
+const app = express()
 
-app.use(require("./webhook"));
-app.use(require("./verifyDownload"));
-app.use(require("./admin"));
+//====Admin Page ====
+app.get("/admin", (req,res) => {
+    if(req.query.key !== process.env.ADMIN_SECRET) {
+        return res.status(401).send("Unauthorized")
+    }
 
-app.get("/",(req,res) => {
-    res.send("LushLayout system is running 🚀");
-});
+    res.sendFile(path.join(__dirname,"admin.html"))
+})
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => 
-console.log("Server running on port", PORT));
+//===== API: List Orders ====
+app.get("/api/orders", (req,res) => {
+    if(req.query.key !== process.env.ADMIN_SECRET) {
+        return res.status(401).json({error: "Unauthorized"})
+    }
+
+    const ordersPath = path.join(__dirname, "orders.json")
+    const orders = JSON.parse(fs.readFileSync(ordersPath, "utf-8"))
+
+    res.json(orders)
+})
+
+const PORT = process.env.PORT || 3000
+app.listen(PORT, () => {
+    console.log("Server running on", PORT)
+})
