@@ -4,6 +4,10 @@ const fs = require("fs")
 const { error } = require("console")
 
 const app = express()
+app.get("/", (req, res) => {
+  res.send("LushLayout System is running 🚀");
+});
+
 
 //====Admin Page ====
 app.get("/admin", (req,res) => {
