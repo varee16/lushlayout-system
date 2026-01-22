@@ -1,6 +1,5 @@
 const fs = require("fs");
 const archiver = require("archiver");
-const archiver = require("archiver");
 
 module.exports = function generateZip(orderId, license, email) {
     const output = fs.createWriteStream(
