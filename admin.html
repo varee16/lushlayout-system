@@ -2,7 +2,7 @@
 <html lang="th">
     <head>
         <meta charset="UTF-8">
-        <title>Admin Orders</title>
+        <title>Admin-Orders</title>
         <style>
             body{ font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 20px;}
             table { border-collapse: collapse; width: 100%;}
@@ -14,8 +14,9 @@
     <body>
         
         <h1>📦 Order List</h1>
+        <div id="status">กำลังโหลด...</div>
 
-        <table id="orders">
+        <table id="ordersT">
             <thead>
                 <tr>
                     <th>Order ID</th>
@@ -39,7 +40,7 @@
                 const tbody = document.querySelector("#orders tbody")
                 const now = Date.now()
 
-                data.forEach(o => {
+                data.orders.forEach(o => {
                     const expired = now > o.expireAt
                     const tr = document.createElement("tr")
 
