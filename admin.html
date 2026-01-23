@@ -16,7 +16,7 @@
         <h1>📦 Order List</h1>
         <div id="status">กำลังโหลด...</div>
 
-        <table id="ordersT">
+        <table id="orders">
             <thead>
                 <tr>
                     <th>Order ID</th>
@@ -34,7 +34,7 @@
             const params = new URLSearchParams(window.location.search)
             const key = params.get("key")
 
-            fetch(`/api/orders?key=${key}`)
+            fetch(`/api/orders?key=${encodeURIComponent(key)}`)
             .then(res => res.json())
             .then(data => {
                 const tbody = document.querySelector("#orders tbody")
