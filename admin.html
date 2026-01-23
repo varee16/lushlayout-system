@@ -37,7 +37,12 @@
             fetch(`/api/orders?key=${encodeURIComponent(key)}`)
             .then(res => res.json())
             .then(data => {
+
+                if(!data.success) return
+
                 const tbody = document.querySelector("#orders tbody")
+                tbody.innerHTML = ""
+                
                 const now = Date.now()
 
                 data.orders.forEach(o => {
